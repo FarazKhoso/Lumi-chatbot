@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        nunito: ["Nunito", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,33 +60,55 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        lumi: {
+          coral: "hsl(var(--lumi-coral))",
+          "coral-light": "hsl(var(--lumi-coral-light))",
+          lavender: "hsl(var(--lumi-lavender))",
+          "lavender-dark": "hsl(var(--lumi-lavender-dark))",
+          cream: "hsl(var(--lumi-cream))",
+          "warm-gray": "hsl(var(--lumi-warm-gray))",
+          sunshine: "hsl(var(--lumi-sunshine))",
+          mint: "hsl(var(--lumi-mint))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "2xl": "1.25rem",
+        "3xl": "1.5rem",
+      },
+      boxShadow: {
+        soft: "var(--shadow-soft)",
+        bubble: "var(--shadow-bubble)",
+        "card-lumi": "var(--shadow-card)",
+        glow: "var(--shadow-glow)",
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "bounce-soft": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+        "typing-dot": {
+          "0%, 60%, 100%": { transform: "translateY(0)" },
+          "30%": { transform: "translateY(-8px)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "bounce-soft": "bounce-soft 1s ease-in-out infinite",
+        "typing-dot-1": "typing-dot 1.4s ease-in-out infinite",
+        "typing-dot-2": "typing-dot 1.4s ease-in-out 0.2s infinite",
+        "typing-dot-3": "typing-dot 1.4s ease-in-out 0.4s infinite",
       },
     },
   },
