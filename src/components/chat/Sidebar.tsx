@@ -1,9 +1,10 @@
 import { Conversation } from "@/types/chat";
 import { ConversationItem } from "./ConversationItem";
-import { Sparkles, X } from "lucide-react";
+import { Sparkles, X, PanelLeftClose, PanelLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SidebarProps {
   conversations: Conversation[];
@@ -11,7 +12,7 @@ interface SidebarProps {
   onSelectConversation: (id: string) => void;
   onDeleteConversation: (id: string) => void;
   isOpen: boolean;
-  onClose: () => void;
+  onToggle: () => void;
   searchQuery: string;
 }
 
@@ -21,29 +22,44 @@ export function Sidebar({
   onSelectConversation,
   onDeleteConversation,
   isOpen,
-  onClose,
+  onToggle,
   searchQuery,
 }: SidebarProps) {
+  const isMobile = useIsMobile();
   const filteredConversations = conversations.filter((conv) =>
     conv.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Collapsed toggle button (shows when sidebar is closed on desktop)
+  if (!isOpen && !isMobile) {
+    return (
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={onToggle}
+        className="fixed left-4 top-4 z-50 h-10 w-10 rounded-xl bg-card shadow-card-lumi border hover:bg-muted"
+      >
+        <PanelLeft className="w-5 h-5" />
+      </Button>
+    );
+  }
+
   return (
     <>
       {/* Mobile overlay */}
-      {isOpen && (
+      {isOpen && isMobile && (
         <div
-          className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 md:hidden"
-          onClick={onClose}
+          className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40"
+          onClick={onToggle}
         />
       )}
 
       <aside
         className={cn(
-          "fixed md:relative z-50 h-full w-80 bg-card border-r",
-          "flex flex-col transition-transform duration-300",
-          "md:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          "z-50 h-full w-80 bg-card border-r shrink-0",
+          "flex flex-col transition-all duration-300 ease-in-out",
+          isMobile ? "fixed" : "relative",
+          isMobile && !isOpen && "-translate-x-full"
         )}
       >
         <div className="p-4 border-b flex items-center justify-between">
@@ -56,10 +72,11 @@ export function Sidebar({
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden h-8 w-8"
-            onClick={onClose}
+            className="h-8 w-8 rounded-lg hover:bg-muted"
+            onClick={onToggle}
+            title={isMobile ? "Close sidebar" : "Collapse sidebar"}
           >
-            <X className="w-4 h-4" />
+            {isMobile ? <X className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
           </Button>
         </div>
 
@@ -78,7 +95,7 @@ export function Sidebar({
                   isActive={conversation.id === activeConversationId}
                   onSelect={() => {
                     onSelectConversation(conversation.id);
-                    onClose();
+                    if (isMobile) onToggle();
                   }}
                   onDelete={() => onDeleteConversation(conversation.id)}
                 />
