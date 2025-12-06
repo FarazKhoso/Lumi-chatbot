@@ -8,29 +8,29 @@ const suggestions = [
   {
     icon: MessageCircle,
     text: "Tell me a fun fact!",
-    color: "bg-lumi-lavender text-secondary-foreground",
+    color: "bg-secondary text-secondary-foreground",
   },
   {
     icon: Heart,
     text: "I need some encouragement today",
-    color: "bg-lumi-coral-light text-foreground",
+    color: "bg-primary/10 text-foreground",
   },
   {
     icon: Zap,
     text: "Help me brainstorm ideas",
-    color: "bg-lumi-mint text-foreground",
+    color: "bg-accent text-foreground",
   },
 ];
 
 export function WelcomeScreen({ onSuggestionClick }: WelcomeScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center h-full px-4 animate-scale-in">
-      <div className="w-20 h-20 rounded-3xl bg-gradient-lumi flex items-center justify-center shadow-glow mb-6 animate-float">
+      <div className="w-20 h-20 rounded-3xl bg-gradient-primary flex items-center justify-center shadow-glow mb-6 animate-float">
         <Sparkles className="w-10 h-10 text-primary-foreground" />
       </div>
 
       <h1 className="text-3xl font-bold mb-2">
-        Hi, I'm <span className="text-gradient-lumi">Lumi</span>! ✨
+        Welcome to AI Assistant! ✨
       </h1>
 
       <p className="text-muted-foreground text-center max-w-md mb-8">

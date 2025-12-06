@@ -20,7 +20,7 @@ export function ChatBubble({ message, isLatest }: ChatBubbleProps) {
       style={{ animationDelay: isLatest ? "0ms" : "0ms" }}
     >
       {!isUser && (
-        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-lumi flex items-center justify-center shadow-soft">
+        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-primary flex items-center justify-center shadow-soft">
           <Sparkles className="w-5 h-5 text-primary-foreground" />
         </div>
       )}

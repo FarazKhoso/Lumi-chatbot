@@ -33,12 +33,12 @@ export function ChatHeader({ onMenuClick, onNewChat, onSearch, showSearch }: Cha
         </Button>
 
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-gradient-lumi flex items-center justify-center shadow-soft">
+          <div className="w-9 h-9 rounded-xl bg-gradient-primary flex items-center justify-center shadow-soft">
             <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="font-bold text-lg leading-tight">Lumi</h1>
-            <p className="text-xs text-muted-foreground">Your friendly AI ✨</p>
+            <h1 className="font-bold text-lg leading-tight">AI Assistant</h1>
+            <p className="text-xs text-muted-foreground">Chat with AI</p>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ export function ChatHeader({ onMenuClick, onNewChat, onSearch, showSearch }: Cha
 
         <Button
           onClick={onNewChat}
-          className="h-10 px-4 rounded-xl bg-gradient-lumi hover:opacity-90 shadow-soft"
+          className="h-10 px-4 rounded-xl bg-gradient-primary hover:opacity-90 shadow-soft"
         >
           <Plus className="w-4 h-4 mr-2" />
           New Chat

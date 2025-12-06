@@ -37,7 +37,7 @@ export function Sidebar({
         variant="ghost"
         size="icon"
         onClick={onToggle}
-        className="fixed left-4 top-4 z-50 h-10 w-10 rounded-xl bg-card shadow-card-lumi border hover:bg-muted"
+        className="fixed left-4 top-4 z-50 h-10 w-10 rounded-xl bg-card border hover:bg-muted"
       >
         <PanelLeft className="w-5 h-5" />
       </Button>
@@ -64,7 +64,7 @@ export function Sidebar({
       >
         <div className="p-4 border-b flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-lumi flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-primary-foreground" />
             </div>
             <span className="font-bold text-lg">History</span>
@@ -84,7 +84,7 @@ export function Sidebar({
           {filteredConversations.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <p className="text-sm">No conversations yet</p>
-              <p className="text-xs mt-1">Start chatting with Lumi! ✨</p>
+              <p className="text-xs mt-1">Start a new conversation!</p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -106,7 +106,7 @@ export function Sidebar({
 
         <div className="p-4 border-t">
           <p className="text-xs text-center text-muted-foreground">
-            Made with ❤️ by Lumi
+            AI Chat Application
           </p>
         </div>
       </aside>

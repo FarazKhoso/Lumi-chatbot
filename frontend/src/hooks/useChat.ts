@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { Message, Conversation } from "@/types/chat";
 
-const LUMI_PERSONALITY = `You are Lumi, a warm, caring, and lovable AI friend. You always respond with kindness, use gentle emojis (😊 ❤️ ✨ 🌟 💫), and make people feel supported. You're excited to help, never judgmental, and add small touches of joy in every reply. Keep responses conversational and friendly, not too long. You speak like a caring best friend who genuinely wants to brighten someone's day.`;
+const ASSISTANT_PERSONALITY = `You are a friendly, helpful, and clear assistant. Use natural language and be kind.`;
 
 const generateId = () => Math.random().toString(36).substring(2, 15);
 
@@ -10,21 +10,36 @@ const generateTitle = (firstMessage: string) => {
   return words.length > 30 ? words.substring(0, 30) + "..." : words;
 };
 
-// Simulated AI response (will be replaced with actual API call when Cloud is enabled)
+// Function to get real AI response from backend API
 const getAIResponse = async (messages: Message[]): Promise<string> => {
-  // Simulate typing delay
-  await new Promise((resolve) => setTimeout(resolve, 1000 + Math.random() * 1500));
+  // Use environment variable or default to localhost for development
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
 
-  const responses = [
-    "Aww, I'm so happy you reached out! 😊 That's such an interesting thing to think about. Let me share my thoughts with you... ✨",
-    "Yay, I love chatting with you! 💫 That's a great question. Here's what I think might help...",
-    "Oh, that sounds wonderful! ❤️ I'm here to help however I can. Let's work through this together!",
-    "You're doing amazing by even thinking about this! 🌟 I believe in you. Here's a little encouragement...",
-    "That's so thoughtful of you to share! 😊 I really appreciate you trusting me with this. Here's what comes to mind... ✨",
-    "Ooh, fun topic! 💫 I'm excited to explore this with you. Let me think... okay, here's my take!",
-  ];
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: messages[messages.length - 1].content, // Last user message
+      }),
+    });
 
-  return responses[Math.floor(Math.random() * responses.length)];
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data.response;
+  } catch (error) {
+    console.error('Error getting AI response:', error);
+    throw error;
+  }
 };
 
 export function useChat() {
@@ -110,6 +125,27 @@ export function useChat() {
         );
       } catch (error) {
         console.error("Error getting AI response:", error);
+        // Add an error message to the conversation
+        setConversations((prev) =>
+          prev.map((conv) => {
+            if (conv.id === conversationId) {
+              return {
+                ...conv,
+                messages: [
+                  ...conv.messages,
+                  {
+                    id: generateId(),
+                    role: "assistant",
+                    content: "Sorry, I'm having trouble connecting to the AI service. Please try again.",
+                    timestamp: new Date(),
+                  }
+                ],
+                updatedAt: new Date(),
+              };
+            }
+            return conv;
+          })
+        );
       } finally {
         setIsLoading(false);
       }

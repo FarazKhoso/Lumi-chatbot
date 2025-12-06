@@ -25,7 +25,7 @@ export function ConversationItem({
       className={cn(
         "group relative flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer",
         "transition-all duration-200 hover:bg-muted/80",
-        isActive && "bg-lumi-coral-light border border-primary/20"
+        isActive && "bg-primary-light border border-primary/20"
       )}
       onClick={onSelect}
       onMouseEnter={() => setShowDelete(true)}
@@ -34,7 +34,7 @@ export function ConversationItem({
       <div
         className={cn(
           "flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center",
-          isActive ? "bg-gradient-lumi" : "bg-muted"
+          isActive ? "bg-gradient-primary" : "bg-muted"
         )}
       >
         <MessageCircle

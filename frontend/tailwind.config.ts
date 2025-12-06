@@ -60,15 +60,15 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        lumi: {
-          coral: "hsl(var(--lumi-coral))",
-          "coral-light": "hsl(var(--lumi-coral-light))",
-          lavender: "hsl(var(--lumi-lavender))",
-          "lavender-dark": "hsl(var(--lumi-lavender-dark))",
-          cream: "hsl(var(--lumi-cream))",
-          "warm-gray": "hsl(var(--lumi-warm-gray))",
-          sunshine: "hsl(var(--lumi-sunshine))",
-          mint: "hsl(var(--lumi-mint))",
+        brand: {
+          primary: "hsl(var(--brand-primary))",
+          "primary-light": "hsl(var(--brand-primary-light))",
+          secondary: "hsl(var(--brand-secondary))",
+          "secondary-dark": "hsl(var(--brand-secondary-dark))",
+          tertiary: "hsl(var(--brand-tertiary))",
+          "neutral": "hsl(var(--brand-neutral))",
+          highlight: "hsl(var(--brand-highlight))",
+          accent: "hsl(var(--brand-accent))",
         },
       },
       borderRadius: {
@@ -81,7 +81,7 @@ export default {
       boxShadow: {
         soft: "var(--shadow-soft)",
         bubble: "var(--shadow-bubble)",
-        "card-lumi": "var(--shadow-card)",
+        card: "var(--shadow-card)",
         glow: "var(--shadow-glow)",
       },
       keyframes: {

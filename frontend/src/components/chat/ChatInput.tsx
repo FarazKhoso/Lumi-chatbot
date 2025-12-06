@@ -10,7 +10,7 @@ interface ChatInputProps {
   placeholder?: string;
 }
 
-export function ChatInput({ onSend, isLoading, placeholder = "Message Lumi..." }: ChatInputProps) {
+export function ChatInput({ onSend, isLoading, placeholder = "Type your message..." }: ChatInputProps) {
   const [input, setInput] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -40,7 +40,7 @@ export function ChatInput({ onSend, isLoading, placeholder = "Message Lumi..." }
 
   return (
     <div className="relative">
-      <div className="glass-effect rounded-2xl shadow-card-lumi p-2 flex items-end gap-2">
+      <div className="glass-effect rounded-2xl p-2 flex items-end gap-2">
         <Textarea
           ref={textareaRef}
           value={input}
@@ -63,7 +63,7 @@ export function ChatInput({ onSend, isLoading, placeholder = "Message Lumi..." }
           size="icon"
           className={cn(
             "h-11 w-11 rounded-xl shrink-0 transition-all duration-300",
-            "bg-gradient-lumi hover:opacity-90 hover:shadow-glow",
+            "bg-gradient-primary hover:opacity-90 hover:shadow-glow",
             "disabled:opacity-40 disabled:hover:shadow-none"
           )}
         >
@@ -76,7 +76,7 @@ export function ChatInput({ onSend, isLoading, placeholder = "Message Lumi..." }
       </div>
 
       <p className="text-center text-xs text-muted-foreground mt-2">
-        Lumi can make mistakes. Consider checking important info ✨
+        AI assistant can make mistakes. Consider checking important info.
       </p>
     </div>
   );
